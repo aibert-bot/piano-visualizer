@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Piano Visualizer — Mockups</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0f0f23; color: #e0e0e0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 20px; }
+  
+  .mockup-label { 
+    text-align: center; font-size: 14px; color: #888; margin-bottom: 8px; 
+    text-transform: uppercase; letter-spacing: 2px;
+  }
+  .mockup-section { margin-bottom: 50px; }
+  
+  /* Piano keyboard */
+  .piano-container { display: flex; justify-content: center; margin: 16px 0; }
+  .piano { position: relative; display: flex; height: 160px; }
+  .white-key {
+    width: 36px; height: 160px; background: #f5f5f5; border: 1px solid #ccc;
+    border-radius: 0 0 5px 5px; position: relative; z-index: 1;
+    display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8px;
+    font-size: 11px; color: #999; cursor: pointer;
+  }
+  .white-key.active-lh { background: #3b82f6; border-color: #2563eb; color: #fff; }
+  .white-key.active-rh { background: #f97316; border-color: #ea580c; color: #fff; }
+  .black-key {
+    width: 24px; height: 100px; background: #222; border: 1px solid #111;
+    border-radius: 0 0 4px 4px; position: absolute; z-index: 2;
+    display: flex; align-items: flex-end; justify-content: center; padding-bottom: 6px;
+    font-size: 10px; color: #666; cursor: pointer;
+  }
+  .black-key.active-lh { background: #2563eb; border-color: #1d4ed8; color: #fff; }
+  .black-key.active-rh { background: #ea580c; border-color: #c2410c; color: #fff; }
+  
+  .finger-num { 
+    position: absolute; bottom: 10px; font-weight: bold; font-size: 14px;
+    width: 22px; height: 22px; border-radius: 50%; display: flex; 
+    align-items: center; justify-content: center;
+  }
+  .white-key .finger-num { background: rgba(0,0,0,0.15); color: #fff; }
+  .black-key .finger-num { background: rgba(255,255,255,0.2); color: #fff; bottom: 6px; }
+  
+  /* Controls */
+  .controls { display: flex; justify-content: center; gap: 8px; margin: 12px 0; flex-wrap: wrap; }
+  .btn {
+    padding: 8px 16px; border-radius: 8px; border: 1px solid #333; 
+    background: #1e1e3a; color: #ccc; font-size: 13px; cursor: pointer;
+  }
+  .btn.active { background: #3b82f6; color: #fff; border-color: #3b82f6; }
+  .btn.active-orange { background: #f97316; color: #fff; border-color: #f97316; }
+  
+  /* Level pills */
+  .level-row { display: flex; justify-content: center; gap: 6px; margin: 8px 0; }
+  .level-pill {
+    padding: 4px 12px; border-radius: 20px; border: 1px solid #444;
+    background: #1a1a2e; color: #888; font-size: 12px;
+  }
+  .level-pill.active { background: #3b82f6; color: #fff; border-color: #3b82f6; }
+  
+  /* Lyrics bar */
+  .lyrics-bar {
+    text-align: center; font-size: 22px; margin: 12px 0; letter-spacing: 4px;
+  }
+  .lyrics-bar span { color: #666; padding: 0 2px; }
+  .lyrics-bar span.active { color: #f97316; font-weight: bold; font-size: 26px; }
+  
+  /* Chord badge */
+  .chord-badge {
+    text-align: center; font-size: 14px; color: #3b82f6; margin: 6px 0;
+  }
+  
+  /* Nav tabs */
+  .nav { display: flex; justify-content: center; gap: 0; margin-bottom: 20px; }
+  .nav-tab {
+    padding: 10px 24px; background: #1a1a2e; color: #666; border: 1px solid #333;
+    font-size: 14px; cursor: pointer;
+  }
+  .nav-tab:first-child { border-radius: 8px 0 0 8px; }
+  .nav-tab:last-child { border-radius: 0 8px 8px 0; }
+  .nav-tab.active { background: #2a2a4e; color: #fff; border-color: #555; }
+  
+  /* Step controls */
+  .step-controls { display: flex; justify-content: center; gap: 12px; margin: 12px 0; align-items: center; }
+  .step-btn {
+    width: 40px; height: 40px; border-radius: 50%; border: 1px solid #444;
+    background: #1e1e3a; color: #ccc; font-size: 18px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .step-label { color: #666; font-size: 12px; }
+  
+  /* Section header */
+  .section-title { text-align: center; font-size: 20px; color: #fff; margin-bottom: 4px; font-weight: 600; }
+  .section-sub { text-align: center; font-size: 13px; color: #666; margin-bottom: 16px; }
+
+  .divider { border: none; border-top: 1px solid #222; margin: 40px 0; }
+</style>
+</head>
+<body>
+
+<!-- ===== MOCKUP 1: Chord Explorer ===== -->
+<div class="mockup-section">
+  <p class="mockup-label">Screen 1 — Chord Explorer</p>
+  <div class="section-title">错位时空 — Chord Explorer</div>
+  <div class="section-sub">Left Hand Practice</div>
+  
+  <div class="nav">
+    <div class="nav-tab active">🎹 Chords</div>
+    <div class="nav-tab">🎵 Melody</div>
+  </div>
+  
+  <!-- Chord selector -->
+  <div class="controls">
+    <div class="btn active">Cm</div>
+    <div class="btn">Gm</div>
+    <div class="btn">A♭</div>
+    <div class="btn">E♭</div>
+    <div class="btn">Fm</div>
+    <div class="btn">D♭</div>
+    <div class="btn">B♭</div>
+    <div class="btn">G</div>
+  </div>
+  
+  <!-- LH Level -->
+  <div class="level-row">
+    <div class="level-pill active">L1</div>
+    <div class="level-pill">L2</div>
+    <div class="level-pill">L3</div>
+    <div class="level-pill">L4</div>
+    <div class="level-pill">L5</div>
+  </div>
+  
+  <!-- Piano: Cm chord highlighted (C3, Eb3, G3) -->
+  <div class="piano-container">
+    <div class="piano" style="position:relative;">
+      <!-- We'll draw a simplified 2-octave keyboard C3-B4 -->
+      <!-- Octave 3: C D E F G A B -->
+      <div class="white-key active-lh" style="left:0px;"><span class="finger-num">1</span></div><!--C3-->
+      <div class="white-key" style="left:36px;"></div><!--D3-->
+      <div class="white-key active-lh" style="left:72px;"><span class="finger-num">3</span></div><!--E3(Eb is black)-->
+      <div class="white-key" style="left:108px;"></div><!--F3-->
+      <div class="white-key active-lh" style="left:144px;"><span class="finger-num">5</span></div><!--G3-->
+      <div class="white-key" style="left:180px;"></div><!--A3-->
+      <div class="white-key" style="left:216px;"></div><!--B3-->
+      <!-- Octave 4 -->
+      <div class="white-key" style="left:252px;"></div><!--C4-->
+      <div class="white-key" style="left:288px;"></div><!--D4-->
+      <div class="white-key" style="left:324px;"></div><!--E4-->
+      <div class="white-key" style="left:360px;"></div><!--F4-->
+      <div class="white-key" style="left:396px;"></div><!--G4-->
+      <div class="white-key" style="left:432px;"></div><!--A4-->
+      <div class="white-key" style="left:468px;"></div><!--B4-->
+      
+      <!-- Black keys oct 3 -->
+      <div class="black-key" style="left:22px;"><!-- Db3 --></div>
+      <div class="black-key active-lh" style="left:58px;"><span class="finger-num">3</span></div><!-- Eb3 ✓ -->
+      <div class="black-key" style="left:130px;"><!-- Gb3 --></div>
+      <div class="black-key" style="left:166px;"><!-- Ab3 --></div>
+      <div class="black-key" style="left:202px;"><!-- Bb3 --></div>
+      <!-- Black keys oct 4 -->
+      <div class="black-key" style="left:274px;"><!-- Db4 --></div>
+      <div class="black-key" style="left:310px;"><!-- Eb4 --></div>
+      <div class="black-key" style="left:382px;"><!-- Gb4 --></div>
+      <div class="black-key" style="left:418px;"><!-- Ab4 --></div>
+      <div class="black-key" style="left:454px;"><!-- Bb4 --></div>
+    </div>
+  </div>
+  
+  <div style="text-align:center; margin-top:8px;">
+    <span style="color:#3b82f6; font-size:16px; font-weight:600;">Cm — C, E♭, G</span>
+    <br><span style="color:#666; font-size:12px;">Block chord · Whole note</span>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ===== MOCKUP 2: Melody Player ===== -->
+<div class="mockup-section">
+  <p class="mockup-label">Screen 2 — Melody Player (Chorus)</p>
+  <div class="section-title">错位时空 — Melody Player</div>
+  <div class="section-sub">Right Hand · Chorus</div>
+  
+  <div class="nav">
+    <div class="nav-tab">🎹 Chords</div>
+    <div class="nav-tab active">🎵 Melody</div>
+  </div>
+  
+  <!-- Lyrics -->
+  <div class="lyrics-bar">
+    <span>我</span>
+    <span>吹</span>
+    <span>过</span>
+    <span class="active">你</span>
+    <span>吹</span>
+    <span>过</span>
+    <span>的</span>
+    <span>晚</span>
+    <span>风</span>
+  </div>
+  
+  <div class="chord-badge">Current chord: <strong>Cm</strong></div>
+  
+  <!-- Piano: Eb4 highlighted -->
+  <div class="piano-container">
+    <div class="piano" style="position:relative;">
+      <div class="white-key" style="left:0px;"></div><!--C3-->
+      <div class="white-key" style="left:36px;"></div><!--D3-->
+      <div class="white-key" style="left:72px;"></div><!--E3-->
+      <div class="white-key" style="left:108px;"></div><!--F3-->
+      <div class="white-key" style="left:144px;"></div><!--G3-->
+      <div class="white-key" style="left:180px;"></div><!--A3-->
+      <div class="white-key" style="left:216px;"></div><!--B3-->
+      <div class="white-key" style="left:252px;"></div><!--C4-->
+      <div class="white-key" style="left:288px;"></div><!--D4-->
+      <div class="white-key" style="left:324px;"></div><!--E4-->
+      <div class="white-key" style="left:360px;"></div><!--F4-->
+      <div class="white-key" style="left:396px;"></div><!--G4-->
+      <div class="white-key" style="left:432px;"></div><!--A4-->
+      <div class="white-key" style="left:468px;"></div><!--B4-->
+      
+      <div class="black-key" style="left:22px;"></div>
+      <div class="black-key" style="left:58px;"></div>
+      <div class="black-key" style="left:130px;"></div>
+      <div class="black-key" style="left:166px;"></div>
+      <div class="black-key" style="left:202px;"></div>
+      <div class="black-key" style="left:274px;"></div>
+      <div class="black-key active-rh" style="left:310px;"><span class="finger-num">3</span></div><!-- Eb4 ✓ -->
+      <div class="black-key" style="left:382px;"></div>
+      <div class="black-key" style="left:418px;"></div>
+      <div class="black-key" style="left:454px;"></div>
+    </div>
+  </div>
+  
+  <!-- Step controls -->
+  <div class="step-controls">
+    <div class="step-btn">◀</div>
+    <div class="step-label">Note 4 / 31</div>
+    <div class="step-btn">▶</div>
+  </div>
+  <div style="text-align:center; color:#f97316; font-size:14px; font-weight:600;">E♭4 · Finger 3</div>
+  <div style="text-align:center; color:#555; font-size:11px; margin-top:4px;">← → arrow keys to navigate</div>
+</div>
+
+<hr class="divider">
+
+<!-- ===== MOCKUP 3: Both hands combined view ===== -->
+<div class="mockup-section">
+  <p class="mockup-label">Future — Both Hands Combined</p>
+  <div class="section-title">错位时空 — Full View</div>
+  <div class="section-sub">Both Hands · Chorus</div>
+  
+  <div class="lyrics-bar">
+    <span>我</span>
+    <span>吹</span>
+    <span>过</span>
+    <span class="active">你</span>
+    <span>吹</span>
+    <span>过</span>
+    <span>的</span>
+    <span>晚</span>
+    <span>风</span>
+  </div>
+  
+  <div class="piano-container">
+    <div class="piano" style="position:relative;">
+      <!-- LH: Cm = C3, Eb3, G3 highlighted blue -->
+      <!-- RH: Eb4 highlighted orange -->
+      <div class="white-key active-lh" style="left:0px;"><span class="finger-num">1</span></div><!--C3-->
+      <div class="white-key" style="left:36px;"></div>
+      <div class="white-key" style="left:72px;"></div>
+      <div class="white-key" style="left:108px;"></div>
+      <div class="white-key active-lh" style="left:144px;"><span class="finger-num">5</span></div><!--G3-->
+      <div class="white-key" style="left:180px;"></div>
+      <div class="white-key" style="left:216px;"></div>
+      <div class="white-key" style="left:252px;"></div>
+      <div class="white-key" style="left:288px;"></div>
+      <div class="white-key" style="left:324px;"></div>
+      <div class="white-key" style="left:360px;"></div>
+      <div class="white-key" style="left:396px;"></div>
+      <div class="white-key" style="left:432px;"></div>
+      <div class="white-key" style="left:468px;"></div>
+      
+      <div class="black-key" style="left:22px;"></div>
+      <div class="black-key active-lh" style="left:58px;"><span class="finger-num">3</span></div><!-- Eb3 -->
+      <div class="black-key" style="left:130px;"></div>
+      <div class="black-key" style="left:166px;"></div>
+      <div class="black-key" style="left:202px;"></div>
+      <div class="black-key" style="left:274px;"></div>
+      <div class="black-key active-rh" style="left:310px;"><span class="finger-num">3</span></div><!-- Eb4 -->
+      <div class="black-key" style="left:382px;"></div>
+      <div class="black-key" style="left:418px;"></div>
+      <div class="black-key" style="left:454px;"></div>
+    </div>
+  </div>
+  
+  <div style="text-align:center; margin-top:10px;">
+    <span style="display:inline-block; width:12px; height:12px; background:#3b82f6; border-radius:3px; margin-right:4px; vertical-align:middle;"></span>
+    <span style="color:#888; font-size:12px; margin-right:16px;">Left Hand (Cm)</span>
+    <span style="display:inline-block; width:12px; height:12px; background:#f97316; border-radius:3px; margin-right:4px; vertical-align:middle;"></span>
+    <span style="color:#888; font-size:12px;">Right Hand (E♭4)</span>
+  </div>
+</div>
+
+</body>
+</html>
